@@ -38,7 +38,7 @@ class FiltroFormTest(TestCase):
 
     def test_filtro_form_columns_field_label(self):
         form = FiltroForm()
-        self.assertTrue(form.fields['columns'].label == 'Number of columns to see')
+        self.assertTrue(form.fields['columns'].label == 'Number of columns')
 
     def test_filtro_form_date_in_past(self):
         date = datetime.date.today() - datetime.timedelta(days=1)
@@ -90,6 +90,11 @@ class Only_Work_Days_Function_Test(TestCase):
         date = datetime.date(2021,12,4) #its saturday
         aux = only_work_days(date)
         self.assertNotEquals(date, aux)
+
+    def test_nonwork_days_return(self):
+        date = datetime.date(2021,12,4) #its saturday
+        aux = only_work_days(date)
+        self.assertEquals(datetime.date(2021,12,3), aux)
 
 
 # Teste da view home, não testar sem rodar python manage.py collectstatic
