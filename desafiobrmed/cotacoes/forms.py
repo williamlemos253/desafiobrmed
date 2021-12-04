@@ -20,6 +20,8 @@ class FiltroForm(forms.Form):
             date = datetime.date.today()
         if date > datetime.date.today():
             raise forms.ValidationError("the date entered is later than today's ")
+        elif date.weekday() in (5,6):
+            raise forms.ValidationError("only working days are accepted")
 
         return date
 

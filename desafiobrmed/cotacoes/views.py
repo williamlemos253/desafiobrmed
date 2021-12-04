@@ -27,6 +27,15 @@ def get_from_db_or_api(date):
     return aux_rates
 
 
+# elimina dias não uteis
+def only_work_days(date):
+    if date.weekday() in (5,6):
+        date = date - datetime.timedelta(days=1)
+    if date.weekday() in (5,6):
+        date = date - datetime.timedelta(days=1)
+
+    return date
+
 # view
 def home(request, date=datetime.date.today(), columns=5):
     count = 0
@@ -40,6 +49,7 @@ def home(request, date=datetime.date.today(), columns=5):
             columns = form.cleaned_data.get('columns')
 
     while count < columns:
+        date = only_work_days(date)
         taxe = get_from_db_or_api(date)
         taxes.insert(0,taxe)
         count +=1

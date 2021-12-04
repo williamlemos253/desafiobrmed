@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from .models import Taxas
 from .forms import FiltroForm
-from .views import rates_api, get_from_db_or_api, home
+from .views import rates_api, get_from_db_or_api, only_work_days, home
 import datetime
 
 
@@ -78,8 +78,21 @@ class Get_From_Db_or_Api_Test(TestCase):
         self.assertEquals(date, aux)
 
 
+# Teste da função de remover dias não úteis
+class Only_Work_Days_Function_Test(TestCase):
 
-# Teste da view home
+    def test_work_days(self):
+        date = datetime.date(2021,12,3) #its friday
+        aux = only_work_days(date)
+        self.assertEquals(date, aux)
+
+    def test_nonwork_days(self):
+        date = datetime.date(2021,12,4) #its saturday
+        aux = only_work_days(date)
+        self.assertNotEquals(date, aux)
+
+
+# Teste da view home, não testar sem rodar python manage.py collectstatic
 class HomeViewTest(TestCase):
 
     def test_view_url_exists_at_desired_location(self):

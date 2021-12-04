@@ -6,9 +6,9 @@
 
 
 {% block content %}
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css"/>
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div class="container">
     <div id="chartcontainer"></div>
 
@@ -114,7 +114,10 @@
 
 <script>
 $(function() {
-    $( "#id_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $( "#id_date" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    beforeShowDay: $.datepicker.noWeekends // disable weekends
+    });
 });
 
 </script>
