@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+
+{% block title %}Dolar Currency{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css"/>
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<div class="container">
+    <div id="chartcontainer"></div>
+
+
+    <section class="section">
+        <form method="POST" autocomplete="off">
+            <div class="columns is-vcentered is-centered">
+
+
+                {% csrf_token %}
+                <div class="field is-grouped">
+                    {{ form.date|bulma }}
+
+                    {{ form.columns|bulma }}
+                </div>
+            </div>
+           <p class="has-text-centered">
+                <input type="submit" value="Filter" class="button is-primary is-large">
+            </p>
+
+
+</div>
+</form>
+</div>
+</section>
+</div>
+
+
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('chartcontainer', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Currency quote '
+      },
+      xAxis: {
+          categories: [
+          {% for taxe in taxes %}
+           '{{taxe.date}}',
+           {% endfor %}
+          ]
+      },
+       yAxis: {
+        allowDecimals: false,
+        min: 0,
+        title: {
+            text: 'Currency quote compared to dollar'
+        }
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0,
+        }
+    },
+      series: [
+      {
+          name: 'Dolar',
+          data: [
+          {% for taxe in taxes %}
+            {{taxe.taxa_dolar|floatformat:-2}},
+           {% endfor %}
+          ],
+          color: 'green'
+      }, {
+          name: 'Real',
+          data: [
+          {% for taxe in taxes %}
+                {{taxe.taxa_real|floatformat:-2}},
+           {% endfor %}
+          ],
+          color: 'red'
+         },{
+         name: 'Iene',
+          data: [
+          {% for taxe in taxes %}
+            {{taxe.taxa_iene|floatformat:-2}},
+           {% endfor %}
+          ],
+          color: 'blue'
+      }, {
+          name: 'Euro',
+          data: [
+          {% for taxe in taxes %}
+                {{taxe.taxa_euro|floatformat:-2}},
+          {% endfor %}
+          ],
+          color: 'gray'
+      },
+      ]
+  });
+
+
+
+
+
+
+
+</script>
+
+
+<script>
+$(function() {
+    $( "#id_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+});
+
+</script>
+
+
+{% endblock content %}
