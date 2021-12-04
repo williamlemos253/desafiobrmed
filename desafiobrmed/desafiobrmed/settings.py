@@ -34,11 +34,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'pacientes',
-    'escalas',
-    'bootstrap4',
-    'import_export',
+    'django.contrib.staticfiles'
+    'cotacoes',
+    'bulma',
+    'whitenoise.runserver_nostatic',
+
+
 ]
 
 MIDDLEWARE = [
