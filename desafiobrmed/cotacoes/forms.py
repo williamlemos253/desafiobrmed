@@ -12,7 +12,7 @@ VIEW_CHOICES = (
 
 class FiltroForm(forms.Form):
     date = forms.DateField(required=False, label='Initial Date')
-    columns = forms.ChoiceField(choices=VIEW_CHOICES, label='Number of columns to see')
+    columns = forms.ChoiceField(choices=VIEW_CHOICES, label='Number of columns')
 
     def clean_date(self):
         date = self.cleaned_data['date']
