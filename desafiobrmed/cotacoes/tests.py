@@ -112,7 +112,7 @@ class HomeViewTest(TestCase):
         response = self.client.post('/')
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_post_response_at_home_view(self):
+    def test_post_response_with_data_at_home_view(self):
         data = {
         'date': '2020-01-31',
         'columns': '1'
