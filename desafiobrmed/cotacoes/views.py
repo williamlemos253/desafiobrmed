@@ -49,7 +49,6 @@ def home(request, date=datetime.date.today(), columns=5):
 
     while count < columns:
         date = only_work_days(date)
-        date = only_work_days(date)
         taxe = get_from_db_or_api(date)
         taxes.insert(0,taxe)
         count +=1
