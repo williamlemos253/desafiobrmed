@@ -41,7 +41,7 @@ class FiltroFormTest(TestCase):
         self.assertTrue(form.fields['columns'].label == 'Number of columns')
 
     def test_filtro_form_date_in_past(self):
-        date = datetime.date.today() - datetime.timedelta(days=1)
+        date = datetime.date(2021,12,3)
         form = FiltroForm(data={'date': date, 'columns': 5})
         self.assertTrue(form.is_valid())
 
@@ -93,7 +93,7 @@ class Only_Work_Days_Function_Test(TestCase):
 
     def test_nonwork_days_return(self):
         date = datetime.date(2021,12,4) #its saturday
-        aux = only_work_days(date)
+        aux = only_work_days(date) #if work return friday
         self.assertEquals(datetime.date(2021,12,3), aux)
 
 
